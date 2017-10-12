@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+
+<!-- namenode config -->
+<property>
+  <name>dfs.nameservices</name>
+  <value>ochadoopcluster</value>
+  <description>
+    Comma-separated list of nameservices.
+  </description>
+</property>
+<property>
+  <name>dfs.namenode.name.dir</name>
+  <value>/home/ochadoop/app/hadoop-ocdp3.5/data/namenode</value>
+  <description>Determines where on the local filesystem the DFS name node should store the name table.If this is a comma-delimited list of directories,then name table is replicated in all of the directories,for redundancy.</description>
+  <final>true</final>
+</property>
+<property>
+  <name>dfs.ha.namenodes.ochadoopcluster</name>
+  <value>nn1,nn2</value>
+  <description>The prefix for a given nameservice, contains a comma-separated list of namenodes for a given nameservice (eg EXAMPLENAMESERVICE).</description>
+</property>
+<property>
+  <name>dfs.namenode.rpc-address.ochadoopcluster.nn1</name>
+  <value>ochadoop1:8020</value>
+  <description>Rpc address of namenode nn1</description>
+</property>
+<property>
+  <name>dfs.namenode.http-address.ochadoopcluster.nn1</name>
+  <value>ochadoop1:50070</value>
+  <description>Http address of namenode nn1</description>
+</property>
+<property>
+  <name>dfs.namenode.rpc-address.ochadoopcluster.nn2</name>
+  <value>ochadoop2:8020</value>
+  <description>Rpc address of namenode nn2</description>
+</property>
+<property>
+  <name>dfs.namenode.http-address.ochadoopcluster.nn2</name>
+  <value>ochadoop2:50070</value>
+  <description>Http address of namenode nn2</description>
+</property>
+<property>
+  <name>dfs.namenode.shared.edits.dir</name>
+  <value>qjournal://ochadoop1:8485;ochadoop2:8485;ochadoop3:8485/ochadoopcluster</value>
+  <description>3 journalnodes to store edits</description>
+</property>
+<property>
+  <name>dfs.namenode.handler.count</name>
+  <value>80</value>
+  <description>The number of server threads for the namenode.</description>
+</property>
+<property>
+  <name>dfs.datanode.handler.count</name>
+  <value>15</value>
+  <description>The number of server threads for the datanode.</description>
+</property>
+<!-- journalnode & ha config -->
+<property>
+  <name>dfs.journalnode.edits.dir</name>
+  <value>/home/ochadoop/app/hadoop-ocdp3.5/data/journaldata/jn</value>
+  <description>journaldata storage dir</description>
+</property>
+<property>
+  <name>dfs.journalnode.rpc-address</name>
+  <value>0.0.0.0:8485</value>
+</property>
+<property>
+  <name>dfs.journalnode.http-address</name>
+  <value>0.0.0.0:8480</value>
+</property>
+<property>
+  <name>dfs.ha.zkfc.port</name>
+  <value>8019</value>
+</property>
+<property>
+  <name>dfs.client.failover.proxy.provider.ochadoopcluster</name>
+  <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+</property>
+<property>
+  <name>dfs.ha.automatic-failover.enabled</name>
+  <value>true</value>
+  <description>
+    Whether automatic failover is enabled. See the HDFS High
+    Availability documentation for details on automatic HA
+    configuration.
+  </description>
+</property>
+<!-- datanode config -->
+<property>
+  <name>dfs.datanode.address</name>
+  <value>0.0.0.0:50010</value>
+  <description>
+    The datanode server address and port for data transfer.
+    If the port is 0 then the server will start on a free port.
+  </description>
+</property>
+<property>
+  <name>dfs.datanode.http.address</name>
+  <value>0.0.0.0:50075</value>
+  <description>
+    The datanode http server address and port.
+    If the port is 0 then the server will start on a free port.
+  </description>
+</property>
+<property>
+  <name>dfs.datanode.ipc.address</name>
+  <value>0.0.0.0:50020</value>
+  <description>
+    The datanode ipc server address and port.
+    If the port is 0 then the server will start on a free port.
+  </description>
+</property>
+<property>
+   <name>dfs.datanode.data.dir</name>
+   <value>/home/ochadoop/app/hadoop-ocdp3.5/data</value>
+   <description>Determines where on the local filesystem an DFS data node should store its blocks.If this is a comma-delimited list of directories,then data will be stored in all named directories,typically on different devices.Directories that do not exist are ignored.
+   </description>
+   <final>true</final>
+</property>
+<property>
+  <name>dfs.datanode.max.transfer.threads</name>
+  <value>4096</value>
+  <description>
+      Specifies the maximum number of threads to use for transferring data
+      in and out of the DN.
+  </description>
+</property>
+<property>
+  <name>dfs.datanode.du.reserved</name>
+  <value>5368709120</value>
+  <description>Reserved space in bytes per volume. Always leave this much space free for non dfs use.
+  </description>
+</property>
+<property>
+  <name>dfs.datanode.balance.bandwidthPerSec</name>
+  <value>67108864</value>
+  <description>
+      Specifies the maximum amount of bandwidth that each datanode
+      can utilize for the balancing purpose in term of
+      the number of bytes per second.
+  </description>
+</property>
+<!-- common config -->
+<property>
+  <name>heartbeat.recheck.interval</name>
+  <value>15000</value>
+</property>
+<property>
+  <name>dfs.heartbeat.interval</name>
+  <value>3</value>
+  <description>Determines datanode heartbeat interval in seconds.</description>
+</property>
+<property>
+  <name>dfs.replication</name>
+  <value>3</value>
+</property>
+<property>
+  <name>dfs.blocksize</name>
+  <value>134217728</value>
+  <description>
+      The default block size for new files, in bytes.
+      You can use the following suffix (case insensitive):
+      k(kilo), m(mega), g(giga), t(tera), p(peta), e(exa) to specify the size (such as 128k, 512m, 1g, etc.),
+      Or provide complete size in bytes (such as 134217728 for 128 MB).
+  </description>
+</property>
+<property>
+  <name>dfs.client.socket-timeout</name>
+  <value>300000</value>
+  <description></description>
+</property>
+<!-- namenode img config -->
+<property>
+  <name>dfs.image.compress</name>
+  <value>false</value>
+  <description>Should the dfs image be compressed?
+  </description>
+</property>
+<property>
+  <name>dfs.image.compression.codec</name>
+  <value>org.apache.hadoop.io.compress.SnappyCodec</value>
+  <description>If the dfs image is compressed, how should they be compressed?
+               This has to be a codec defined in io.compression.codecs.
+  </description>
+</property>
+<property>
+  <name>dfs.image.transfer.timeout</name>
+  <value>60000</value>
+  <description>
+        Socket timeout for image transfer in milliseconds. This timeout and the related
+        dfs.image.transfer.bandwidthPerSec parameter should be configured such
+        that normal image transfer can complete successfully.
+        This timeout prevents client hangs when the sender fails during
+        image transfer. This is socket timeout during image tranfer.
+  </description>
+</property>
+<property>
+  <name>dfs.image.transfer.bandwidthPerSec</name>
+  <value>0</value>
+  <description>
+        Maximum bandwidth used for image transfer in bytes per second.
+        This can help keep normal namenode operations responsive during
+        checkpointing. The maximum bandwidth and timeout in
+        dfs.image.transfer.timeout should be set such that normal image
+        transfers can complete successfully.
+        A default value of 0 indicates that throttling is disabled.
+  </description>
+</property>
+<property>
+  <name>dfs.image.transfer.chunksize</name>
+  <value>65536</value>
+  <description>
+        Chunksize in bytes to upload the checkpoint.
+        Chunked streaming is used to avoid internal buffering of contents
+        of image file of huge size.
+  </description>
+</property>
+<!-- security config -->
+<property>
+  <name>dfs.permissions.supergroup</name>
+  <value>ochadoop</value>
+</property>
+<property>
+  <name>dfs.permissions.superusergroup</name>
+  <value>ochadoop</value>
+</property>
+<property>
+  <name>dfs.permissions.enabled</name>
+  <value>true</value>
+  <description>
+    If "true", enable permission checking in HDFS.
+    If "false", permission checking is turned off,
+    but all other behavior is unchanged.
+    Switching from one parameter value to the other does not change the mode,
+    owner or group of files or directories.
+  </description>
+</property>
+<property>
+  <name>dfs.namenode.acls.enabled</name>
+  <value>true</value>
+  <description>
+    Set to true to enable support for HDFS ACLs (Access Control Lists).  By
+    default, ACLs are disabled.  When ACLs are disabled, the NameNode rejects
+    all RPCs related to setting or getting ACLs.
+  </description>
+</property>
+
+</configuration>

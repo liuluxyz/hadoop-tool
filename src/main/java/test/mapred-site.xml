@@ -1,0 +1,213 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+<property>
+<name>mapred.job.tracker</name>
+<value>10.19.114.41:9001</value>
+<description>
+The host and port that the MapReduce job tracker runs
+at.  If "local", then jobs are run in-process as a single map
+and reduce task.
+</description>
+</property>
+
+<property>
+<name>mapred.job.tracker.http.address</name>
+<value>10.19.114.41:50030</value>
+<description>
+The job tracker http server address and port the server will listen on.
+If the port is 0 then the server will start on a free port.
+</description>
+</property>
+
+<property>
+<name>mapred.job.tracker.handler.count</name>
+<value>2</value>
+<description>
+The number of server threads for the JobTracker. This should be roughly
+4% of the number of tasktracker nodes.
+</description>
+</property>
+
+<property>
+<name>mapred.tasktracker.map.tasks.maximum</name>
+<value>4</value>
+</property>
+
+<property>
+<name>mapreduce.task.io.sort.mb</name>
+<value>300</value>
+</property>
+
+<property>
+<name>mapred.tasktracker.reduce.tasks.maximum</name>
+<value>2</value>
+<description>
+The maximum number of reduce tasks that will be run
+simultaneously by a task tracker.
+</description>
+</property>
+
+<property>
+<name>mapred.task.tracker.report.address</name>
+<value>127.0.0.1:0</value>
+<description>
+The interface and port that task tracker server listens on.
+Since it is only connected to by the tasks, it uses the local interface.
+EXPERT ONLY. Should only be changed if your host does not have the loopback
+interface.
+</description>
+</property>
+
+
+<property>
+<name>mapred.local.dir</name>
+<value>/home/ocdc/data/mr1</value>
+<description>
+The local directory where MapReduce stores intermediate
+data files.  May be a comma-separated list of
+directories on different devices in order to spread disk i/o.
+Directories that do not exist are ignored.
+</description>
+</property>
+
+<property>
+<name>mapred.system.dir</name>
+<value>/home/ocdc/data/mr1</value>
+<description>
+The shared directory where MapReduce stores control files.
+</description>
+</property>
+
+<property>
+<name>mapred.temp.dir</name>
+<value>/home/ocdc/data/mr1</value>
+<description>
+A shared directory for temporary files.
+</description>
+</property>
+
+<property>
+<name>mapred.map.tasks</name>
+<value>1</value>
+<description>
+The default number of map tasks per job.
+Ignored when mapred.job.tracker is "local".
+</description>
+</property>
+
+<property>
+<name>mapred.reduce.tasks</name>
+<value>2</value>
+<description>
+The default number of reduce tasks per job. Typically set to 99%
+of the cluster's reduce capacity, so that if a node fails the reduces can
+still be executed in a single wave.
+Ignored when mapred.job.tracker is "local".
+</description>
+</property>
+
+<property>
+<name>hadoop.job.history.user.location</name>
+<value>none</value>
+<description> 
+User can specify a location to store the history files of
+a particular job. If nothing is specified, the logs are stored in
+output directory. The files are stored in "_logs/history/" in the directory.
+User can stop logging by giving the value "none".
+</description>
+</property>
+
+<property>
+<name>mapred.compress.map.output</name>
+<value>true</value>
+</property>
+
+<property>
+<name>mapred.tasktracker.expiry.interval</name>
+<value>30000</value>
+</property>
+
+<property>
+<name>mapred.job.reuse.jvm.num.tasks</name>
+<value>1</value>
+<description>
+How many tasks to run per jvm. If set to -1, there is
+no limit.
+</description>
+</property>
+
+<property>
+<name>mapred.task.timeout</name>
+<value>6000000</value>
+<description>
+The number of milliseconds before a task will be
+terminated if it neither reads an input, writes an output, nor
+updates its status string.
+</description>
+</property>
+
+<property>
+<name>mapred.reduce.parallel.copies</name>
+<value>20</value>
+</property>
+
+<property>
+<name>mapred.child.java.opts</name>
+<value>-Xmx1024m</value>
+</property>
+
+<property>
+<name>mapreduce.job.counters.counter.name.max</name>
+<value>200</value>
+</property>
+
+
+<property>
+<name>mapreduce.jobtracker.taskscheduler.maxrunningtasks.perjob</name>
+<value>50000</value>
+</property>
+
+<property>
+<name>mapred.map.tasks.speculative.execution</name>
+<value>false</value>
+</property>
+
+<property>
+<name>mapred.queue.names</name>
+<value>default,etl</value>
+</property>
+<property>  
+   <name>mapred.jobtracker.taskScheduler</name>  
+   <value>org.apache.hadoop.mapred.FairScheduler</value>  
+</property>  
+<property>  
+   <name>mapred.fairscheduler.allocation.file</name>  
+   <value>/home/ocdc/app/mr1/conf/fair-scheduler.xml</value>  
+</property>
+<property>  
+     <name>mapred.fairscheduler.preemption</name>  
+     <value>true</value>  
+</property>               
+<property>  
+      <name>mapred.fairscheduler.assignmultiple</name>  
+      <value>true</value>  
+</property>                
+<property>  
+      <name>mapred.fairscheduler.poolnameproperty</name>  
+      <value>mapred.queue.name</value>  
+</property>                    
+<property>  
+      <name>mapred.fairscheduler.preemption.only.log</name>  
+      <value>true</value>  
+</property>                
+<property>  
+      <name>mapred.fairscheduler.preemption.interval</name>  
+      <value>60000</value>  
+</property> 
+
+</configuration>
+
